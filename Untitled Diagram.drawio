@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.0.3">
+  <diagram name="Page-1" id="sY07rD_Y2Wm6XS6kNVrM">
+    <mxGraphModel dx="1426" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-1" value="React Frontend - Port 5000" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="210" width="680" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-2" value="Document&#xa;Upload" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="240" y="250" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-3" value="Chat&#xa;Interface" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="400" y="250" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-4" value="SSO Authentication" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="560" y="250" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-5" value="HTTP/REST" style="endArrow=classic;html=1;strokeWidth=2;" edge="1" parent="1" source="AUF8ypqYCoZ2KfkvPnlS-1" target="AUF8ypqYCoZ2KfkvPnlS-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="540" y="330" as="sourcePoint" />
+            <mxPoint x="540" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-6" value="FastAPI Backend (Port 5003)" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="390" width="680" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-7" value="API Endpoints&#xa;• POST /ingest/file - File upload &amp; processing&#xa;• POST /ingest - Direct text ingestion&#xa;• POST /query - Natural language queries&#xa;• GET /models - Available LLM models&#xa;• GET /sso/userinfo - User authentication proxy" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="430" width="600" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-8" value="Ingestion&#xa;Service" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="260" y="560" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-9" value="Query Service" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="500" y="560" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-10" value="File Processing&#xa;• PDF extraction&#xa;• CSV parsing&#xa;• JSON parsing&#xa;• Text chunking" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="260" y="650" width="140" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-11" value="Vector Search&#xa;• Query embedding&#xa;• Similarity search&#xa;• Context retrieval" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="500" y="650" width="140" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-12" value="" style="endArrow=classic;html=1;strokeWidth=2;dashed=1;" edge="1" parent="1" source="AUF8ypqYCoZ2KfkvPnlS-8" target="AUF8ypqYCoZ2KfkvPnlS-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-13" value="" style="endArrow=classic;html=1;strokeWidth=2;dashed=1;" edge="1" parent="1" source="AUF8ypqYCoZ2KfkvPnlS-9" target="AUF8ypqYCoZ2KfkvPnlS-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-14" value="" style="endArrow=classic;html=1;strokeWidth=2;dashed=1;" edge="1" parent="1" source="AUF8ypqYCoZ2KfkvPnlS-6" target="AUF8ypqYCoZ2KfkvPnlS-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="750" as="sourcePoint" />
+            <mxPoint x="380" y="810" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-15" value="LLM&#xa;Client&#xa;&#xa;• AWS&#xa;  Bedrock&#xa;• Azure&#xa;  OpenAI&#xa;• Batch&#xa;  Embed&#xa;• Chat&#xa;  Complete" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="280" y="810" width="100" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-16" value="TigerGraph&#xa;Database&#xa;&#xa;• Document&#xa;  Vertices&#xa;• Vector&#xa;  Index&#xa;• HNSW&#xa;  Search" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="810" width="120" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-17" value="" style="endArrow=classic;html=1;strokeWidth=2;dashed=1;" edge="1" parent="1" source="AUF8ypqYCoZ2KfkvPnlS-10" target="AUF8ypqYCoZ2KfkvPnlS-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-18" value="" style="endArrow=classic;html=1;strokeWidth=2;dashed=1;" edge="1" parent="1" source="AUF8ypqYCoZ2KfkvPnlS-10" target="AUF8ypqYCoZ2KfkvPnlS-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AUF8ypqYCoZ2KfkvPnlS-19" value="" style="endArrow=classic;html=1;strokeWidth=2;dashed=1;" edge="1" parent="1" source="AUF8ypqYCoZ2KfkvPnlS-11" target="AUF8ypqYCoZ2KfkvPnlS-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
