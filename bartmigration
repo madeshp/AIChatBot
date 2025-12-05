@@ -1,0 +1,184 @@
+The current BART UI relies heavily on Expero’s proprietary framework, which restricts customization, scalability, and long-term support. Many components are tightly coupled to vendor-specific code, making enhancements slow, costly, and difficult to maintain. The existing stack is outdated and misaligned with modern React best practices, limiting performance and developer productivity. Migrating to a modern React-based UI gives full control over the user experience, improves maintainability, and enables rapid feature development. It also allows adoption of advanced libraries like Cytoscape, MSAL, React Query, and TanStack Table for better performance and richer capabilities. Additionally, migration ensures seamless Azure SSO integration, stronger security, and eliminates vendor lock-in, reducing both future risks and operational costs.
+
+
+1. Target Future Architecture
+🏗 Frontend:
+
+React 18+
+
+TypeScript
+
+Vite or Next.js 14 (recommended for SSO + Routing)
+
+State Management: Redux Toolkit OR Recoil/Zustand
+
+UI Library: MUI / Chakra UI OR TailwindCSS+ShadCN
+
+Graph Visualization: Cytoscape.js (open-source, no Expero dependency)
+
+🔌 Backend:
+
+Not part of this question — assumed unchanged. Backend only exposes:
+
+TigerGraph REST endpoints
+
+Authentication (Azure OAuth)
+
+Notification/Queue endpoints
+
+2. Modules You Need to Rebuild
+
+From your description, you need to migrate 8 modules:
+
+A. Top Navigation
+
+User menu
+
+Display user details
+
+Show “User Management” only for admin role
+
+Permissions panel (RBAC)
+
+B. Search Explorer
+
+Graph Explorer
+
+Search bar for vertex IDs
+
+Render TigerGraph nodes/edges using Cytoscape.js
+
+Expand neighbors like TigerGraph GraphStudio
+
+Node Details Drawer
+
+C. Queues
+
+Alerts Queue
+
+Cases Queue
+
+Hotlists Queue
+
+Ring Queue
+
+Paginated list
+
+Filters
+
+Status badges
+
+Drilldown details screen
+
+D. Authentication
+
+Azure OAuth SSO (MSAL)
+
+E. Entities and Ring Pages
+
+PEA Entity / PEE Entity / Ring Details
+
+Tabular format
+
+Sub-panels (addresses, accounts, devices etc.)
+
+Audit trail
+
+3. Migration Plan — Phase by Phase
+Phase 1: Discovery & Architecture
+
+✔ Review current Expero components
+✔ Identify custom logic (TigerGraph queries, expansions)
+✔ Prepare API contract layer (REST wrapper)
+✔ Plan data models (TypeScript interfaces)
+
+OUTPUT: Architecture document + UI wireframes
+
+Phase 2: Setup New Project
+
+Choose Vite + React + TS or Next.js.
+
+Install base packages:
+
+npm create vite@latest bart-ui --template react-ts
+
+
+Core libraries to install:
+
+npm install axios redux react-redux @reduxjs/toolkit react-router-dom
+npm install tailwindcss @tanstack/react-table
+npm install cytoscape cytoscape-dagre
+npm install @azure/msal-browser @azure/msal-react
+
+Phase 3: Authentication Implementation
+
+Use Azure MSAL to enforce SSO.
+
+Packages:
+
+@azure/msal-browser
+
+@azure/msal-react
+
+Features:
+
+✔ Login redirect
+✔ Access Token retrieval
+✔ Admin role detection
+✔ Token injection in API calls
+
+Phase 4: Graph Explorer Migration
+
+Rebuild graph visualization using pure Cytoscape.js.
+
+Packages:
+
+cytoscape
+
+cytoscape-dagre (layout)
+
+cytoscape-popper (tooltips)
+
+cytoscape-expand-collapse (optional)
+
+Features:
+
+✔ Load Vertex by ID
+✔ Expand neighbors
+✔ Node-style mapping (type → color)
+✔ Node click → side drawer
+
+Phase 5: Queues Migration
+
+Each queue becomes its own reusable table page.
+
+Packages:
+
+@tanstack/react-table (BEST modern table)
+
+swr or react-query for data fetching
+
+date-fns for formatting
+
+Features:
+
+✔ Pagination
+✔ Filters
+✔ Column sorting
+✔ Row details page
+
+Phase 6: Entity & Ring Details Pages
+
+Build structured data grids.
+
+Packages:
+
+@tanstack/react-table
+
+react-json-view-lite (optional for JSON display)
+
+Features:
+✔ Summary panel
+✔ Related PE entities
+✔ Accounts / Devices / Addresses
+✔ Risk score components
