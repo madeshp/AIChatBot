@@ -1,0 +1,171 @@
+TigerGraph Documentation – Managing Stale or Duplicate PAEEntity Vertices
+1. Background
+
+In the data model, PAEEntity vertices represent a specific type of entity that can connect to multiple PEEntity vertices.
+Over time, due to entity shifts, ID changes, or data re-ingestion, multiple PAEEntity vertices may end up representing the same real-world entity.
+
+Symptoms of this problem:
+
+Duplicate PAEEntity nodes pointing to the same set of PEEntity nodes
+
+Old PAEEntity nodes becoming stale when a fresh version is inserted
+
+Analyst confusion because multiple versions appear in the graph explorer
+
+Wrong results in fraud detection or Louvain community clustering due to duplications
+
+To solve this, the system needs a way to:
+
+Identify when a PAEEntity was last updated
+
+Compare two or more PAEEntity nodes associated with the same PEEntity
+
+Keep the most recent one
+
+Delete older or stale versions
+
+2. Introducing a New Attribute: LastUpdatedDateTime
+Purpose of the Attribute
+
+Store the exact timestamp when the PAEEntity was last refreshed or created.
+
+Allow the system to easily determine the latest version of an entity.
+
+Enable automatic cleanup jobs to identify stale/duplicate nodes.
+
+Improve downstream analytics and ensure a clean cluster structure.
+
+Where It Will Be Added
+
+The attribute will be added directly to the PAEEntity vertex type.
+
+It becomes part of the standard metadata for every PAEEntity node.
+
+What It Represents
+
+If the vertex already existed, the timestamp indicates when it was last synchronized.
+
+If the vertex was newly created during data load, the timestamp marks its creation moment.
+
+3. Pre-Data-Load Activity: Updating Last Updated Timestamp
+
+Before ingesting the new batch of data, all existing PAEEntity vertices must have their LastUpdatedDateTime refreshed.
+
+Why This Is Important
+
+Ensures consistent baseline timestamps across existing PAEEntities.
+
+Helps the system determine which entities are “older” vs. “newly inserted” after the load.
+
+Prevents accidental deletion of legitimate nodes during the cleanup process.
+
+Outcome of Pre-Load Update
+
+All PAEEntity vertices will have a fresh timestamp.
+
+Any newly created PAEEntity added during the data load will naturally have a newer timestamp.
+
+This prepares the graph for the cleanup logic that follows.
+
+4. Data Load Phase
+
+When the batch/stream load runs:
+
+New PAEEntity vertices may be inserted.
+
+Existing ones may be linked to additional PEEntity nodes.
+
+Some new PAEEntity vertices may represent the same real-world object as older ones.
+
+After the load completes:
+
+The graph may contain clusters of PAEEntity vertices referencing the same set of PEEntity connections.
+
+Only one version should remain—the most recently updated one.
+
+5. Post-Data-Load Cleanup Job: DeleteStaleEntity
+
+The cleanup process is designed to detect stale or duplicate PAEEntity vertices and remove them.
+
+5.1. Goal of DeleteStaleEntity
+
+Ensure that for any given set of PEEntity connections, only one PAEEntity vertex is retained.
+
+Always keep the one with the latest LastUpdatedDateTime.
+
+Remove all older versions that refer to the same underlying entity.
+
+5.2. How the Cleanup Logic Works
+Step 1: Identify Related PAEEntities
+
+For each PEEntity, find all PAEEntity vertices connected to it.
+
+Group PAEEntity vertices that share the same set of connected PEEntity nodes.
+
+Step 2: Determine the "Latest" PAEEntity
+
+For each group of duplicates:
+
+Compare their LastUpdatedDateTime values.
+
+Identify the PAEEntity vertex with the most recent timestamp.
+
+Mark it as the primary or retained entity.
+
+Step 3: Mark Stale Entities for Deletion
+
+All PAEEntity vertices in the group except the primary one are marked as stale.
+
+This includes:
+
+Outdated versions
+
+Incorrectly ingested duplicates
+
+Entities that still have relationships but represent older data
+
+Step 4: Delete Stale PAEEntity Vertices
+
+All marked stale entities are removed from the graph.
+
+Their redundant edges are also removed.
+
+The PEEntity nodes will now link only to the latest valid PAEEntity.
+
+6. Benefits of This Approach
+Eliminates Duplicate Noise
+
+Only one authoritative PAEEntity remains for each real-world entity, reducing confusion.
+
+Ensures High-Quality Relationships
+
+PEEntity nodes will no longer show multiple parent PAEEntities representing the same source.
+
+Improves Fraud & Risk Analytics
+
+Cleaner entity clusters improve Louvain results, graph traversal clarity, and detection accuracy.
+
+Prevents Long-Term Data Drift
+
+The timestamp-based method guarantees that stale or incorrect versions get automatically cleaned over time.
+
+7. Operational Workflow Summary
+Before Every Data Load
+
+Refresh LastUpdatedDateTime for all PAEEntity vertices.
+
+During Data Load
+
+Insert new PAEEntity nodes with fresh timestamps.
+
+After Data Load
+
+Run DeleteStaleEntity job:
+
+Identify duplicates based on PEEntity connections
+
+Compare LastUpdatedDateTime
+
+Keep only the latest PAEEntity
+
+Delete stale ones
