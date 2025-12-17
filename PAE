@@ -169,3 +169,159 @@ Compare LastUpdatedDateTime
 Keep only the latest PAEEntity
 
 Delete stale ones
+
+
+
+1️⃣ Users Tab
+
+Manage individual users and their access
+
+What to show
+
+User List (Table)
+
+User ID / Username
+
+Full Name
+
+Email
+
+Role(s) assigned
+
+Group(s)
+
+Status (Active / Suspended / Locked)
+
+Last Login
+
+Created Date
+
+User Actions
+
+➕ Create User
+
+✏️ Edit User
+
+🔒 Activate / Deactivate
+
+🔁 Reset Password
+
+❌ Delete / Soft Delete
+
+👁 View Audit History
+
+User Details Panel
+
+Basic Info (name, email, department)
+
+Assigned Groups
+
+Direct Permissions (overrides)
+
+MFA status
+
+Session info (optional)
+
+2️⃣ Groups Tab
+
+Logical grouping of users (recommended for permission management)
+
+What to show
+
+Group List
+
+Group Name
+
+Description
+
+Number of Users
+
+Assigned Roles / Permissions
+
+Created Date
+
+Group Actions
+
+➕ Create Group
+
+✏️ Edit Group
+
+👥 Add / Remove Users
+
+❌ Delete Group
+
+Group Details View
+
+Users in the group
+
+Permissions inherited by the group
+
+Role mapping (if using roles)
+
+Audit trail of changes
+
+👉 Best practice: Assign permissions to groups, not directly to users.
+
+3️⃣ Permissions Tab
+
+Fine-grained access control for BART features
+
+Permission Categories (recommended)
+
+Case & Alert Management
+
+View Alerts
+
+Create / Edit Case
+
+Assign Case
+
+Close Case
+
+Graph & Entity Exploration
+
+View Graph
+
+Expand Neighbors
+
+Run Algorithms (Louvain, PageRank, etc.)
+
+Export Graph
+
+Data Operations
+
+Load Data
+
+Soft Delete Entity
+
+Merge Entities
+
+Administration
+
+Manage Users
+
+Manage Groups
+
+Manage Permissions
+
+System Configuration
+
+Permission View Layout
+
+Permission Table
+
+Permission Name
+
+Module (Case, Graph, Admin, etc.)
+
+Description
+
+Assigned To (Groups / Roles)
+
+Actions
+
+Toggle Enable / Disable
+
+Assign to Group / Role
+
+Create Custom Permission (optional)
