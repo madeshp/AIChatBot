@@ -325,3 +325,82 @@ Toggle Enable / Disable
 Assign to Group / Role
 
 Create Custom Permission (optional)
+
+
+👤 OAuth User Profile – Display Only
+1️⃣ Identity Information (Read-only)
+
+Profile Photo (from IdP)
+
+Full Name
+
+Username / User ID
+
+Email Address
+
+Identity Provider
+
+e.g., Azure AD, Google, Okta
+
+External User ID (sub / oid – masked)
+
+Account Status (Active)
+
+2️⃣ Organization Info (Read-only)
+
+Organization / Tenant
+
+Department
+
+Job Title (if provided by IdP)
+
+3️⃣ Access Summary (Read-only)
+
+Assigned Role(s)
+
+Group Membership(s)
+
+Access Level Summary
+
+Case Access: View / Edit
+
+Graph Access: View / Analyze
+
+Admin Access: Yes / No
+
+⚠️ No permission editing
+
+4️⃣ Authentication & Security (Read-only)
+
+Login Method: SSO (OAuth)
+
+MFA Status (Enabled / Enforced by IdP)
+
+Last Login Date & Time
+
+Last Login IP (optional)
+
+Active Session (current only)
+
+🚫 No:
+
+Change password
+
+MFA setup
+
+Session termination
+(All handled by IdP)
+
+5️⃣ Preferences (Local to App)
+
+✅ Allowed (app-level only):
+
+Theme (Light / Dark)
+
+Language
+
+Time Zone
+
+Default Landing Page
+
+Notification Preferences
